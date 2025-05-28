@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Digitizers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <header class="bg-blue-600 text-white p-6">
+    <h1 class="text-3xl font-bold">Digital Digitizers</h1>
+    <p class="text-md">Empowering Brands Through Digital Marketing</p>
+  </header>
+<section class="p-6 bg-gray-100">
+  <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Our Services</h2>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 text-center">
+      <div class="text-blue-600 text-4xl mb-3">📈</div>
+      <h3 class="text-xl font-semibold mb-2">Content Strategy</h3>
+      <p class="text-sm text-gray-600">We help you plan, create, and deliver content that grows your brand online.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 text-center">
+      <div class="text-pink-500 text-4xl mb-3">📱</div>
+      <h3 class="text-xl font-semibold mb-2">Social Media Marketing</h3>
+      <p class="text-sm text-gray-600">We manage and grow your brand presence across all major platforms.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 text-center">
+      <div class="text-green-500 text-4xl mb-3">🚀</div>
+      <h3 class="text-xl font-semibold mb-2">Website Traffic Growth</h3>
+      <p class="text-sm text-gray-600">We use data-driven SEO and campaigns to increase site visitors.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 text-center">
+      <div class="text-yellow-500 text-4xl mb-3">✉️</div>
+      <h3 class="text-xl font-semibold mb-2">Email Campaigns</h3>
+      <p class="text-sm text-gray-600">We craft effective email campaigns to keep your audience engaged.</p>
+    </div>
+
+  </div>
+</section>
+
+
+  <section class="p-6">
+    <h2 class="text-2xl font-semibold mb-4">About Us</h2>
+    <p class="text-gray-700">We are a team of digital marketers helping brands grow their online presence through data-driven strategies and content.</p>
+  </section>
+
+  <section class="p-6 bg-gray-100">
+    <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
+
+    <div class="mb-4 text-gray-700">
+      <p><strong>Phone:</strong> 9155126922</p>
+      <p><strong>Email:</strong> <a href="mailto:anand251.hitit2020@gmail.com" class="text-blue-600 underline">anand251.hitit2020@gmail.com</a></p>
+    </div>
+
+    <form id="contact-form" class="space-y-4 max-w-lg">
+      <input name="name" class="w-full p-2 border rounded" type="text" placeholder="Name" required />
+      <input name="email" class="w-full p-2 border rounded" type="email" placeholder="Email" required />
+      <input name="service" class="w-full p-2 border rounded" type="text" placeholder="Service" required />
+      <textarea name="message" class="w-full p-2 border rounded" rows="4" placeholder="Message" required></textarea>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Send</button>
+    </form>
+  </section>
+
+  <footer class="bg-blue-600 text-white text-center p-4">
+    &copy; 2025 Digital Digitizers. All rights reserved.
+  </footer>
+  <footer class="bg-blue-600 text-white text-center p-2">
+    Made by Anand Kumar Singh
+  </footer>
+
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const form = e.target;
+
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        service: form.service.value,
+        message: form.message.value
+      };
+
+      try {
+        const response = await fetch("http://localhost:5000/enquiries", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.status === 201) {
+          alert("Enquiry submitted successfully.");
+          form.reset();
+        } else {
+          alert("Failed to submit enquiry.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Something went wrong.");
+      }
+    });
+  </script>
+</body>
+</html>

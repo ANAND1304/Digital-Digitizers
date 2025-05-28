@@ -1,15 +1,21 @@
 const express = require('express');
-const cors = require('cors');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const app = express();
-app.use(cors());
 app.use(bodyParser.json());
 
-let services = [];
+const FILE = 'data.json';
 
-app.get('/services', (req, res) => res.json(services));
-app.post('/services', (req, res) => { services.push(req.body); res.sendStatus(201); });
-app.put('/services/:id', (req, res) => { services[req.params.id] = req.body; res.sendStatus(200); });
-app.delete('/services/:id', (req, res) => { services.splice(req.params.id, 1); res.sendStatus(200); });
+app.post('/enquiries', (req, res) => {
+  const data = JSON.parse(fs.readFileSync(FILE, 'utf-8') || '[]');
+  data.push(req.body);
+  fs.writeFileSync(FILE, JSON.stringify(data));
+  res.sendStatus(201);
+});
 
-app.listen(4000, () => console.log('Admin server running on port 4000'));
+app.get('/enquiries', (req, res) => {
+  const data = JSON.parse(fs.readFileSync(FILE, 'utf-8') || '[]');
+  res.json(data);
+});
+
+app.listen(5000, () => console.log('API server running on port 5000'));
